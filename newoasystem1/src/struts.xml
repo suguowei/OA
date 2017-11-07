@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+   <package name="default" extends="struts-default" namespace="/">
+   
+    <!--登录处理事件  -->   
+   <action name="LoginAction" class="com.newoasystem.oa.action.LoginAction" method="execute" >
+   <result name="success">/index.jsp</result>
+   <result name="error">/login.jsp</result>
+   <result name="input">/login.jsp</result>
+   </action>
+   <!--
+         添加人员档案的事件
+   -->
+   <action name="AddRydnAction" class="com.newoasystem.oa.action.RenyuandanganAction" method="addRenyuangdangan">
+   <result name="success">/daohang/renyuanxinxi/register.jsp</result>
+   <result name="input">/daohang/renyuanxinxi/register.jsp</result>
+   </action><!--
+   根据员工姓名模糊查询
+   -->
+   <action name="SelectYgByName" class="com.newoasystem.oa.action.RenyuandanganAction" method="">
+   <result name="success">/daohang/renyuanxinxi/yuangongxinxilist.jsp</result>
+   </action><!--
+   查询所有员工信息
+   -->
+ <action name="selectYgxxAction" class="com.newoasystem.oa.action.RenyuandanganAction" method="selectAllYuangong">
+ <result name="success">/daohang/renyuanxinxi/yuangongxinxilist.jsp</result>
+ </action><!--
+ 添加小组时获取员工信息
+   -->
+  <action name="XiaozuGetYGAction" class="com.newoasystem.oa.action.RenyuandanganAction" method="selectAllYuangong">
+   <result name="success">/daohang/xiaozu/addxiaozu.jsp</result>
+  </action><!--
+  修改员工信息通过员工Id查询员工信息
+  -->
+  <action name="selectByYuangongId" class="com.newoasystem.oa.action.RenyuandanganAction" method="selectByYuangongId">
+  <result name="success">/daohang/renyuanxinxi/update.jsp</result>
+  </action><!--
+  修改员工信息
+  -->
+  <action name="UpdateRydnAction" class="com.newoasystem.oa.action.RenyuandanganAction" method="updateYuanGongxinxi"><!--
+  <result name="success">/daohang/renyuanxinxi/update.jsp</result>
+   <result name="input">/daohang/renyuanxinxi/update.jsp</result>
+  -->
+  <result name="success" type="chain">selectYgxxAction</result>
+  <result name="input" type="chain">selectYgxxAction</result>
+  </action>
+  <!-- 
+  添加小组
+ --><action name="AddXiaoZuAction" class="com.newoasystem.oa.action.XiaozuAction" method="addXiaozu">
+ <result name="success">/daohang/xiaozu/addxiaozu.jsp</result>
+  <result name="input">/daohang/xiaozu/addxiaozu.jsp</result>
+ </action><!--
+ 添加员工时获取小组信息
+   -->
+   <action name="YuangongGetXZAction" class="com.newoasystem.oa.action.XiaozuAction" method="selectAllXiaozu">
+   <result name="success">/daohang/renyuanxinxi/register.jsp</result>
+   </action>
+   <!--
+   获取小组所有信息
+   -->
+   <action name="SelectAllXiaoZuAction" class="com.newoasystem.oa.action.XiaozuAction" method="selectAllXiaozu">
+   <result name="success">/daohang/xiaozu/xiaozulist.jsp</result>
+   </action><!--
+   修改小组信息时要通过小组Id来查询小组信息
+   -->
+   <action name="selectxiaozu" class="com.newoasystem.oa.action.XiaozuAction" method="selectByXiaozuId">
+   <result>/daohang/xiaozu/updatexiaozu.jsp</result>
+   </action>
+   <action name="selectByXiaozuId" class="com.newoasystem.oa.action.RenyuandanganAction" method="selectAllYuangong">
+   <result name="success" type="chain">selectxiaozu</result>
+   </action>
+   <!--
+   更新小组信息
+   -->
+<action name="UpdateXiaoZuAction" class="com.newoasystem.oa.action.XiaozuAction" method="updateXiaozu">
+<result name="success" type="chain">SelectAllXiaoZuAction</result>
+</action>
+<!--获取小组信息显示在考勤页  -->
+<action name="selectXZForKQ" class="com.newoasystem.oa.action.XiaozuAction" method="selectAllXiaozu">
+<result name="success">/daohang/kaoqin/addkaoqinxinxi.jsp</result>
+</action>
+
+</package>
+</struts>
